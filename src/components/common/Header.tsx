@@ -1,17 +1,34 @@
 import { Flex, Heading } from '@chakra-ui/react'
-import { FiSearch } from 'react-icons/fi'
+import { FiSearch, FiX } from 'react-icons/fi'
 
 import Button from 'components/ui/Button'
+import { FC } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
+import { APP_URLS } from 'utils/constants'
 
-const Header = () => {
+const Header: FC = () => {
+    const location = useLocation()
+    const history = useHistory()
+
+    const isSearch: boolean = location.pathname === APP_URLS.SEARCH
+
     return (
         <Flex justifyContent="space-between" alignItems="center" px={6} py={4}>
             <Heading color="gray.200" size="lg" fontStyle="italic">
                 movipe
             </Heading>
 
-            <Button rounded="3xl" colorScheme="black" bg="gray.700">
-                <FiSearch size={18} />
+            <Button
+                rounded="3xl"
+                colorScheme="black"
+                bg="gray.700"
+                onClick={() =>
+                    isSearch
+                        ? history.push(APP_URLS.HOME)
+                        : history.push(APP_URLS.SEARCH)
+                }
+            >
+                {isSearch ? <FiX size={18} /> : <FiSearch size={18} />}
             </Button>
         </Flex>
     )

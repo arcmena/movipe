@@ -1,3 +1,4 @@
 export const APP_URLS = {
-    HOME: '/'
+    HOME: '/',
+    SEARCH: '/search'
 }
