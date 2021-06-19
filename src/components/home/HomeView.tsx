@@ -1,33 +1,23 @@
-import { useEffect, useState } from 'react'
-
+import { Spinner, Box } from '@chakra-ui/react'
 import Section from './Section'
 
-import { listPopularMovies } from '../../services/MovieService'
+import { useMovie } from 'contexts/MovieContext'
 
 const HomeView = () => {
-    const [popularMovies, setPopularMovies] = useState([])
-
-    const loadIndex = async () => {
-        try {
-            const res = await listPopularMovies()
-            setPopularMovies(res.results)
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    useEffect(() => {
-        loadIndex()
-    }, [])
+    const { popularMovies } = useMovie()
 
     return (
-        <>
-            <Section
-                title="Trending"
-                subtitle="Popular on the world"
-                data={popularMovies}
-            />
-        </>
+        <Box>
+            {popularMovies.length !== 0 ? (
+                <Section
+                    title="Trending"
+                    subtitle="Popular on the world"
+                    data={popularMovies}
+                />
+            ) : (
+                <Spinner size="xl" color="gray.600" />
+            )}
+        </Box>
     )
 }
 

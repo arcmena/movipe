@@ -1,20 +1,24 @@
 import { FC } from 'react'
-import { Box, Heading, Image, Text } from '@chakra-ui/react'
+import { Box, Heading, Image as Img, Text } from '@chakra-ui/react'
+import { parseISO } from 'date-fns'
 
 import { Movie } from 'types/Movie'
 import { formatDate } from 'utils/formatters'
-import { parseISO } from 'date-fns'
 
 interface IMovie {
     details: Movie
 }
+
+/*
+    TODO: Await image to load and then display the component
+*/
 
 const MovieCard: FC<IMovie> = ({
     details: { title, poster_path, release_date }
 }) => {
     return (
         <Box display="flex" alignItems="center" flexDirection="column">
-            <Image
+            <Img
                 width="150px"
                 objectFit="cover"
                 src={`http://image.tmdb.org/t/p/w200${poster_path}`}
