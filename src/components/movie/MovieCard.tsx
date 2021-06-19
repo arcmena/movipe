@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Box, Heading, Image as Img, Text } from '@chakra-ui/react'
 import { parseISO } from 'date-fns'
+import LazyLoad from 'react-lazyload'
 
 import { Movie } from 'types/Movie'
 import { formatDate } from 'utils/formatters'
@@ -18,13 +19,15 @@ const MovieCard: FC<IMovie> = ({
 }) => {
     return (
         <Box display="flex" alignItems="center" flexDirection="column">
-            <Img
-                width="150px"
-                objectFit="cover"
-                src={`http://image.tmdb.org/t/p/w200${poster_path}`}
-                alt={title}
-                rounded="3xl"
-            />
+            <LazyLoad height={225}>
+                <Img
+                    width="150px"
+                    objectFit="cover"
+                    src={`http://image.tmdb.org/t/p/w200${poster_path}`}
+                    alt={title}
+                    rounded="3xl"
+                />
+            </LazyLoad>
             <Heading
                 as="h4"
                 size="xs"
