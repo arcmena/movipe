@@ -7,10 +7,10 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { APP_URLS } from 'utils/constants'
 
 const Header: FC = () => {
-    const location = useLocation()
-    const history = useHistory()
+    const browserLocation = useLocation()
+    const browserHistory = useHistory()
 
-    const isSearch: boolean = location.pathname === APP_URLS.SEARCH
+    const isOnSearchPage: boolean = browserLocation.pathname === APP_URLS.SEARCH
 
     return (
         <Flex justifyContent="space-between" alignItems="center" px={6} py={4}>
@@ -23,12 +23,12 @@ const Header: FC = () => {
                 colorScheme="black"
                 bg="gray.700"
                 onClick={() =>
-                    isSearch
-                        ? history.push(APP_URLS.HOME)
-                        : history.push(APP_URLS.SEARCH)
+                    isOnSearchPage
+                        ? browserHistory.push(APP_URLS.HOME)
+                        : browserHistory.push(APP_URLS.SEARCH)
                 }
             >
-                {isSearch ? <FiX size={18} /> : <FiSearch size={18} />}
+                {isOnSearchPage ? <FiX size={18} /> : <FiSearch size={18} />}
             </Button>
         </Flex>
     )
