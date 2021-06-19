@@ -1,35 +1,32 @@
 import { useEffect, useState } from 'react'
-import { Grid, Heading } from '@chakra-ui/react'
+
+import Section from './Section'
 
 import { listPopularMovies } from '../../services/MovieService'
-import MovieCard from '../movie/MovieCard'
 
 const HomeView = () => {
-    const [movies, setMovies] = useState([])
+    const [popularMovies, setPopularMovies] = useState([])
 
-    const loadMovies = async () => {
+    const loadIndex = async () => {
         try {
             const res = await listPopularMovies()
-            setMovies(res.results)
+            setPopularMovies(res.results)
         } catch (error) {
             console.error(error)
         }
     }
 
     useEffect(() => {
-        loadMovies()
+        loadIndex()
     }, [])
 
     return (
         <>
-            <Heading as="h1" size="md" color="gray.200">
-                Trending
-            </Heading>
-            <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
-                {movies.map(movie => (
-                    <MovieCard details={movie} />
-                ))}
-            </Grid>
+            <Section
+                title="Trending"
+                subtitle="Popular on the world"
+                data={popularMovies}
+            />
         </>
     )
 }
