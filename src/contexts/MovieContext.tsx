@@ -29,7 +29,7 @@ interface State {
     searchResults: Movie[]
     genres: Genre[]
     handleMovieSearch: (query: string) => void
-    loadMovieGenres: (query: string) => void
+    loadMovieGenres: () => void
 }
 
 const MovieContext = createContext<State>(initialState)

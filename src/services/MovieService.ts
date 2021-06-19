@@ -24,7 +24,7 @@ interface IGenreResult {
 }
 
 export const listMovieGenres = (): Promise<IGenreResult> =>
-    BaseAPI.get('/genre/movie', {
+    BaseAPI.get('/genre/movie/list', {
         params: { ...defaultParams }
     }).then(({ data }) => data)
 
