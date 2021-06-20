@@ -19,7 +19,15 @@ const SearchResults: FC<ISearchResults> = ({ inputValue, searchResults }) => {
             <Text mt={1} color="gray.400">
                 for "{inputValue}"
             </Text>
-            <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
+            <Grid
+                templateColumns={[
+                    'repeat(2, 1fr)',
+                    'repeat(3, 1fr)',
+                    'repeat(4, 1fr)'
+                ]}
+                gap={4}
+                mt={4}
+            >
                 {searchResults.results.map(movie => {
                     if (!movie.poster_path || !movie.release_date) return null
                     return <MovieResult details={movie} key={movie.id} />

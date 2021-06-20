@@ -14,7 +14,12 @@ const Header: FC = () => {
 
     return (
         <Flex justifyContent="space-between" alignItems="center" px={8} py={4}>
-            <Heading color="gray.200" size="lg" fontStyle="italic">
+            <Heading
+                color="gray.200"
+                size="lg"
+                fontStyle="italic"
+                userSelect="none"
+            >
                 movipe
             </Heading>
 
