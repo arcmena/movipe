@@ -20,8 +20,6 @@ const Header: FC = () => {
 
             <Button
                 rounded="3xl"
-                colorScheme="black"
-                bg="gray.700"
                 onClick={() =>
                     isOnSearchPage
                         ? browserHistory.push(APP_URLS.HOME)
