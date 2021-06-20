@@ -21,7 +21,8 @@ const initialState = {
     searchResults: null,
     genres: [],
     handleMovieSearch: () => null,
-    loadMovieGenres: () => null
+    loadMovieGenres: () => null,
+    resetSearchResults: () => null
 }
 
 interface State {
@@ -30,6 +31,7 @@ interface State {
     genres: Genre[]
     handleMovieSearch: (query: string) => void
     loadMovieGenres: () => void
+    resetSearchResults: () => void
 }
 
 const MovieContext = createContext<State>(initialState)
@@ -37,7 +39,7 @@ const MovieContext = createContext<State>(initialState)
 type Action =
     | { type: 'SET_POPULAR_MOVIES'; values: IMovieResult }
     | { type: 'SET_MOVIE_GENRES'; values: Genre[] }
-    | { type: 'SET_SEARCH_RESULTS'; values: IMovieResult }
+    | { type: 'SET_SEARCH_RESULTS'; values: IMovieResult | null }
 
 const reducer = (state: State, action: Action) => {
     switch (action.type) {
@@ -86,6 +88,8 @@ const MovieProvider: FC = ({ children }) => {
     }
 
     const handleMovieSearch = async (query: string): Promise<void> => {
+        if (query.length < 2) return
+
         try {
             const res = await searchMovies(query)
 
@@ -95,6 +99,9 @@ const MovieProvider: FC = ({ children }) => {
         }
     }
 
+    const resetSearchResults = (): void =>
+        dispatch({ type: 'SET_SEARCH_RESULTS', values: null })
+
     useEffect(() => {
         loadPopularMovies()
     }, [])
@@ -103,7 +110,8 @@ const MovieProvider: FC = ({ children }) => {
         () => ({
             ...state,
             handleMovieSearch,
-            loadMovieGenres
+            loadMovieGenres,
+            resetSearchResults
         }),
         [state]
     )
