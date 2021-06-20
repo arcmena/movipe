@@ -1,5 +1,7 @@
-import { Box, Grid } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { FC } from 'react'
+
+import { HEADER_HEIGHT } from 'utils/constants'
 
 import Header from './Header'
 
@@ -7,9 +9,9 @@ const Layout: FC = ({ children }) => {
     return (
         <Box textAlign="center" bg="gray.900">
             <Header />
-            <Grid minH="100vh" px={4} pb={4}>
+            <Box minH={`calc(100vh - ${HEADER_HEIGHT})`} px={4} pb={4}>
                 {children}
-            </Grid>
+            </Box>
         </Box>
     )
 }
