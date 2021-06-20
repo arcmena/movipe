@@ -1,18 +1,12 @@
 import { BaseAPI } from './AxiosInstances'
-import { Movie } from 'types/Movie'
+
 import { Genre } from 'types/Genre'
+import IMovieResult from 'types/MovieResponse'
 
 const API_KEY = process.env.REACT_APP_API_KEY
 const LANGUAGE = 'en-US'
 
 const defaultParams = { api_key: API_KEY, language: LANGUAGE }
-
-interface IMovieResult {
-    page: number
-    results: Movie[]
-    total_pages: number
-    total_results: number
-}
 
 export const listPopularMovies = (page = 1): Promise<IMovieResult> =>
     BaseAPI.get('/movie/popular', {

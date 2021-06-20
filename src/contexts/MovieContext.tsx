@@ -8,7 +8,7 @@ import {
 } from 'react'
 
 import { Genre } from 'types/Genre'
-import { Movie } from 'types/Movie'
+import IMovieResult from 'types/MovieResponse'
 
 import {
     listMovieGenres,
@@ -17,16 +17,16 @@ import {
 } from 'services/MovieService'
 
 const initialState = {
-    popularMovies: [],
-    searchResults: [],
+    popularMovies: null,
+    searchResults: null,
     genres: [],
     handleMovieSearch: () => null,
     loadMovieGenres: () => null
 }
 
 interface State {
-    popularMovies: Movie[]
-    searchResults: Movie[]
+    popularMovies: IMovieResult | null
+    searchResults: IMovieResult | null
     genres: Genre[]
     handleMovieSearch: (query: string) => void
     loadMovieGenres: () => void
@@ -35,9 +35,9 @@ interface State {
 const MovieContext = createContext<State>(initialState)
 
 type Action =
-    | { type: 'SET_POPULAR_MOVIES'; values: Movie[] }
+    | { type: 'SET_POPULAR_MOVIES'; values: IMovieResult }
     | { type: 'SET_MOVIE_GENRES'; values: Genre[] }
-    | { type: 'SET_SEARCH_RESULTS'; values: Movie[] }
+    | { type: 'SET_SEARCH_RESULTS'; values: IMovieResult }
 
 const reducer = (state: State, action: Action) => {
     switch (action.type) {
@@ -69,7 +69,7 @@ const MovieProvider: FC = ({ children }) => {
         try {
             const res = await listPopularMovies()
 
-            dispatch({ type: 'SET_POPULAR_MOVIES', values: res.results })
+            dispatch({ type: 'SET_POPULAR_MOVIES', values: res })
         } catch (error) {
             console.error(error)
         }
@@ -89,7 +89,7 @@ const MovieProvider: FC = ({ children }) => {
         try {
             const res = await searchMovies(query)
 
-            dispatch({ type: 'SET_SEARCH_RESULTS', values: res.results })
+            dispatch({ type: 'SET_SEARCH_RESULTS', values: res })
         } catch (error) {
             console.error(error)
         }
