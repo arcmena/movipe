@@ -5,4 +5,5 @@ export interface Movie {
     vote_average: string
     poster_path: string
     id: number
+    genre_ids: number[]
 }

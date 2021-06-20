@@ -1,4 +1,5 @@
 import { format, Locale } from 'date-fns'
+import { Genre } from 'types/Genre'
 
 type TOptions = {
     locale?: Locale
@@ -13,3 +14,10 @@ export const formatDate = (
     formatTo: string,
     options?: TOptions
 ): string => format(date, formatTo, options)
+
+export const getGenreList = (
+    genre_ids: number[],
+    genreList: Genre[]
+): Genre[] =>
+    // @ts-ignore
+    genre_ids.map(genre_id => genreList.find(({ id }) => id === genre_id))

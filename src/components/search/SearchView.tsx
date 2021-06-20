@@ -53,6 +53,7 @@ const SearchView = () => {
                         <SearchResults
                             inputValue={searchValue}
                             searchResults={searchResults}
+                            genres={genres}
                         />
                     ) : (
                         <Text textColor="gray.400" mt={4}>
