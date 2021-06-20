@@ -1,5 +1,5 @@
 import { Box, Spinner, Grid, Text, Heading } from '@chakra-ui/react'
-import { ChangeEvent, useEffect, useState, useCallback } from 'react'
+import { ChangeEvent, useEffect, useCallback } from 'react'
 import debounce from 'lodash.debounce'
 
 import { useMovie } from 'contexts/MovieContext'
@@ -15,15 +15,15 @@ const SearchView = () => {
         loadMovieGenres,
         searchResults,
         handleMovieSearch,
-        resetSearchResults
+        resetSearchResults,
+        searchValue,
+        setSearchValue
     } = useMovie()
 
     useEffect(() => {
         if (genres.length === 0) loadMovieGenres()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    const [inputValue, setInputValue] = useState<string>('')
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debounceValue = useCallback(
@@ -33,10 +33,9 @@ const SearchView = () => {
 
     const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target
-        setInputValue(value)
+        setSearchValue(value)
         resetSearchResults()
         if (value && value.trim() !== '') {
-            resetSearchResults()
             debounceValue(value)
         }
     }
@@ -44,7 +43,7 @@ const SearchView = () => {
     return (
         <Box>
             <SearchInput
-                inputValue={inputValue}
+                inputValue={searchValue}
                 handleChangeInput={handleChangeInput}
             />
 
@@ -52,7 +51,7 @@ const SearchView = () => {
                 {searchResults ? (
                     searchResults.results.length !== 0 ? (
                         <SearchResults
-                            inputValue={inputValue}
+                            inputValue={searchValue}
                             searchResults={searchResults}
                         />
                     ) : (
@@ -78,7 +77,7 @@ const SearchView = () => {
                         </Grid>
                     </Box>
                 )}
-                {inputValue && !searchResults && (
+                {searchValue && !searchResults && (
                     <Spinner mt={4} size="xl" color="gray.600" />
                 )}
             </Box>

@@ -20,18 +20,22 @@ const initialState = {
     popularMovies: null,
     searchResults: null,
     genres: [],
+    searchValue: '',
     handleMovieSearch: () => null,
     loadMovieGenres: () => null,
-    resetSearchResults: () => null
+    resetSearchResults: () => null,
+    setSearchValue: () => null
 }
 
 interface State {
     popularMovies: IMovieResult | null
     searchResults: IMovieResult | null
     genres: Genre[]
+    searchValue: string
     handleMovieSearch: (query: string) => void
     loadMovieGenres: () => void
     resetSearchResults: () => void
+    setSearchValue: (value: string) => void
 }
 
 const MovieContext = createContext<State>(initialState)
@@ -40,6 +44,7 @@ type Action =
     | { type: 'SET_POPULAR_MOVIES'; values: IMovieResult }
     | { type: 'SET_MOVIE_GENRES'; values: Genre[] }
     | { type: 'SET_SEARCH_RESULTS'; values: IMovieResult | null }
+    | { type: 'SET_SEARCH_VALUE'; value: string }
 
 const reducer = (state: State, action: Action) => {
     switch (action.type) {
@@ -59,6 +64,12 @@ const reducer = (state: State, action: Action) => {
             return {
                 ...state,
                 searchResults: action.values
+            }
+        }
+        case 'SET_SEARCH_VALUE': {
+            return {
+                ...state,
+                searchValue: action.value
             }
         }
     }
@@ -102,6 +113,9 @@ const MovieProvider: FC = ({ children }) => {
     const resetSearchResults = (): void =>
         dispatch({ type: 'SET_SEARCH_RESULTS', values: null })
 
+    const setSearchValue = (newValue: string): void =>
+        dispatch({ type: 'SET_SEARCH_VALUE', value: newValue })
+
     useEffect(() => {
         loadPopularMovies()
     }, [])
@@ -111,7 +125,8 @@ const MovieProvider: FC = ({ children }) => {
             ...state,
             handleMovieSearch,
             loadMovieGenres,
-            resetSearchResults
+            resetSearchResults,
+            setSearchValue
         }),
         [state]
     )
