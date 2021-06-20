@@ -9,6 +9,10 @@ import Tag from 'components/ui/Tag'
 import SearchInput from './SearchInput'
 import SearchResults from './SearchResults'
 
+/*
+    TODO: implement quick genre search
+*/
+
 const SearchView = () => {
     const {
         genres,
