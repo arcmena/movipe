@@ -24,7 +24,7 @@ const Section: FC<ISection> = ({ title, subtitle, data }) => {
             </Box>
             <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
                 {data.map(movie => (
-                    <MovieCard details={movie} />
+                    <MovieCard details={movie} key={movie.id} />
                 ))}
             </Grid>
         </>
