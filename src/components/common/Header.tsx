@@ -13,7 +13,7 @@ const Header: FC = () => {
     const isOnSearchPage: boolean = browserLocation.pathname === APP_URLS.SEARCH
 
     return (
-        <Flex justifyContent="space-between" alignItems="center" px={6} py={4}>
+        <Flex justifyContent="space-between" alignItems="center" px={8} py={4}>
             <Heading color="gray.200" size="lg" fontStyle="italic">
                 movipe
             </Heading>
