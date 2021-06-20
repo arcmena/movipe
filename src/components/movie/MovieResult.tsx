@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Box, Heading, Image as Img, Text, HStack } from '@chakra-ui/react'
+import { Box, Image as Img, Text } from '@chakra-ui/react'
 import { parseISO } from 'date-fns'
 import LazyLoad from 'react-lazyload'
 import { AiFillStar } from 'react-icons/ai'
