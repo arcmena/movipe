@@ -1,6 +1,6 @@
 ### movipe
 
-A movie search app
+A movie search app. [Try it!](https://movipe.vercel.app/)
 
 #### Getting started
 
