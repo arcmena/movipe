@@ -44,7 +44,12 @@ const MovieCard: FC<IMovie> = ({
                 color="gray.500"
                 mt={1}
             >
-                Movie &#9679; {formatDate(parseISO(release_date), 'yyyy')}
+                Movie{' '}
+                {release_date && (
+                    <span>
+                        &#9679; {formatDate(parseISO(release_date), 'yyyy')}
+                    </span>
+                )}
             </Text>
         </Box>
     )
